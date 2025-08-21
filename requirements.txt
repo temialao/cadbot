@@ -1,0 +1,15 @@
+# Dataset validation and processing dependencies
+
+# Required for enhanced dynamic execution validation
+cadquery>=2.4.0
+
+# Core Python libraries (usually included with Python)
+# ast - for Python syntax validation (built-in)
+# json - for JSON parsing (built-in) 
+# re - for regex operations (built-in)
+# pathlib - for path operations (built-in)
+
+# Optional: Enhanced validation capabilities
+# jsonschema>=4.0.0  # For advanced JSON schema validation
+# black>=22.0.0      # For code formatting validation
+# pylint>=2.15.0     # For advanced Python code analysis
