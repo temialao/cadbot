@@ -159,3 +159,6 @@ data/dataset.jsonl.backup*
 # Training outputs
 training_outputs/
 fine_tuned_models/
+examples/
+results/
+
