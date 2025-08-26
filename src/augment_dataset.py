@@ -16,7 +16,7 @@ client = OpenAI(
 )
 
 # Define the source, destination, and model to use
-SOURCE_FILE = "data/validated_dataset.jsonl"
+SOURCE_FILE = "data/seed_dataset.jsonl"
 DESTINATION_FILE = "data/augmented_dataset.jsonl"
 MODEL_TO_USE = "llama3:8b" # Or "phi3:mini", etc.
 VARIATIONS_PER_ENTRY = 4 # How many messy versions to create for each clean one
@@ -26,7 +26,7 @@ def get_meta_prompt():
     Returns the master prompt template used to guide the LLM.
     This is where we tell the AI how to behave.
     """
-    return f"""
+    return """
 You are a data augmentation specialist for a machine learning project. Your task is to create realistic, varied, and sometimes "messy" user prompts based on a perfect, "textbook" example.
 
 Your goal is to generate {VARIATIONS_PER_ENTRY} alternative prompts for the provided CadQuery script. These alternative prompts must correspond to the EXACT same output code.
@@ -60,9 +60,9 @@ Now, generate {VARIATIONS_PER_ENTRY} variations for the following data point. Pl
 
 **DATA POINT TO AUGMENT:**
 {{
-  "instruction": "{{instruction}}",
-  "input": "{{input}}",
-  "output": "{{output}}"
+  "instruction": "{instruction}",
+  "input": "{input}",
+  "output": "{output}"
 }}
 """
 
@@ -71,6 +71,7 @@ def generate_variations(data_point: dict) -> list[str]:
     prompt_template = get_meta_prompt()
     
     full_prompt = prompt_template.format(
+        VARIATIONS_PER_ENTRY=VARIATIONS_PER_ENTRY,
         instruction=data_point['instruction'],
         input=data_point['input'],
         output=data_point['output']
