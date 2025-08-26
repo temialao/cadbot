@@ -14,14 +14,14 @@ CadBot leverages AI techniques to interpret natural language descriptions and co
   - Hugging Face Transformers
   - PEFT (for LoRA fine-tuning)
 - **Training Platform:** Google Colab
-- **Local Deployment:** Ollama
+- **Local Augmentation & Deployment:** Ollama
 
 ## Project Structure
 
 ```
 cadbot/
 ├── data/                    # Training datasets
-│   └── dataset.jsonl       # CadQuery training data (59 entries)
+│   └── dataset.jsonl       # CadQuery training data
 ├── notebooks/              # Jupyter notebooks for development
 │   └── fine_tuning.ipynb   # Model fine-tuning notebook
 ├── src/                    # Source code
@@ -31,6 +31,7 @@ cadbot/
 │   └── test_validation.py # Validation system tests
 ├── requirements.txt        # Python dependencies
 ├── Modelfile              # Ollama model configuration
+├── AUGMENTATION_GUIDE.md    # Dataset augmentation documentation
 ├── VALIDATION_GUIDE.md    # Dataset validation documentation
 └── README.md             # Project documentation
 ```
@@ -78,6 +79,12 @@ python src/fix_dataset.py
 ```
 
 For detailed validation documentation, see [VALIDATION_GUIDE.md](VALIDATION_GUIDE.md).
+
+## Dataset Augmentation Approach
+
+The final training dataset will be created by the augment_dataset script. This script configures a local LLM to create variations of each entry in `seed_dataset.jsonl`, aiming to train the final model to understand a wide range of user prompting styles. 
+
+For guidance on dataset augmentation with a local LLM, see [AUGMENTATION_GUIDE.md](AUGMENTATION_GUIDE.md).
 
 ## Getting Started
 
